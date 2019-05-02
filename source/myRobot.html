@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+attribute  vec4 vPosition;
+attribute  vec4 vColor;
+varying vec4 fColor;
+
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+uniform mat4 translationMatrix;
+
+
+void main()
+{
+    fColor = vColor;
+    gl_Position = projectionMatrix * modelViewMatrix * translationMatrix * vPosition;
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+
+precision mediump float;
+
+varying  vec4 fColor;
+
+void main()
+{
+    gl_FragColor = fColor;
+}
+</script>
+
+<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+<script type="text/javascript" src="../Common/initShaders.js"></script>
+<script type="text/javascript" src="../Common/MV.js"></script>
+<script type="text/javascript" src="myRobot.js"></script>
+
+<div>
+body angle -180 <input id="bodySlider" type="range"
+ min="-180" max="180" step="1" value="0"
+  />
+ 180
+</div><br/>
+
+<div>
+lower arm angle -180 <input id="lowerArmSlider" type="range"
+ min="-180" max="180" step="1" value="0"
+  />
+ 180
+</div><br/>
+
+<div>
+upper arm angle -180 <input id="upperArmSlider" type="range"
+ min="-180" max="180" step="1" value="0"
+  />
+ 180
+</div><br/>
+
+
+<body>
+<canvas id="gl-canvas" width="400"" height="400">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+</body>
+</html>
